@@ -1,0 +1,85 @@
+
+<html lang="en">
+
+
+<head>
+    <meta charset="UTF-8">
+    <script src="https://fb.me/react-15.1.0.js"></script>
+    <script src="https://fb.me/react-dom-15.1.0.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.23/browser.js"></script>
+    <!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+    <title>Title</title>
+</head>
+
+<body>
+<div id="container">
+	<div class="row">
+  <div class="col-sm-5 target">
+  </div>
+  </div>
+
+</div>
+</body>
+	<script type = "text/babel">
+		var Badge = React.createClass({
+			render: function() {
+				return (<button className="btn btn-primary" type="button">
+  							{this.props.badgeTitle} <span className="badge">{this.props.count}</span>
+						</button>);
+			}
+		});
+
+		var Thumbnail = React.createClass({
+			render: function() {
+				return (
+					<div className="thumbnail">
+      					<img src={this.props.imageSource} alt="..." />
+      					<div className="caption">
+        					<h3>{this.props.thumbTitle}</h3>
+        					<p>{this.props.caption}</p>
+        					<p><Badge badgeTitle={this.props.badgeTitle} count={this.props.count} /></p>
+      					</div>
+    				</div>
+					
+					);
+			}
+		});
+
+		var ThumbnailList = React.createClass({
+			render: function() {
+				var list = this.props.thumbnailData.map(function(thumbnailProps){
+				return <Thumbnail {...thumbnailProps}/>
+				});
+				return(<div>{list}</div>);
+			}		
+		});
+
+		var options = {
+			thumbnailData: [{
+				thumbTitle: "React Tutorials",
+				caption: "These are a bunch of React Tutorials",
+				count: 4,
+				badgeTitle	: "React Tutorials",
+				imageSource:"http://formatjs.io/img/react.svg"
+				},
+			
+				{
+				thumbTitle: "Gulp Tutorials",
+				caption: "These are a bunch of Gulp Tutorials",
+				count: 10,
+				badgeTitle	: "Gulp Tutorials",
+				imageSource:"https://avatars0.githubusercontent.com/u/6200624?v=3&s=400"
+				}
+
+			]}
+			
+
+		
+
+		var element = React.createElement(ThumbnailList, options);
+
+		ReactDOM.render(element,  document.querySelector('.target'));
+	</script>
+
+</html>
